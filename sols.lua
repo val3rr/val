@@ -12,8 +12,8 @@ local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
 humanoid.WalkSpeed = 19
 
-local wpfolder = Instance.new("Folder",workspace)
-wpfolder.Name = "waypoints"
+local wpfolder = workspace:FindFirstChild("waypoints")
+if not wpfolder then wpfolder = Instance.new("Folder",workspace) wpfolder.Name = "waypoints" end
 
 local symbols = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", "[", "]", ";", ":", "'", "\"", ",", "<", ">", ".", "/", "?", "`", "~"}
 local letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
