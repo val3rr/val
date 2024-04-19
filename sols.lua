@@ -45,17 +45,19 @@ local function generateCode()
 end
 
 local function checkblessing()
-	return workspace:FindFirstChild("Map"):FindFirstChild("BuffGivers")["Basic Blessing"].Attachment.Star.Enabled
+	return map:FindFirstChild("BuffGivers")["Basic Blessing"].Attachment.Star.Enabled
 end
 
 local function path()
 	local p
 	if checkblessing() == true then
-		p = workspace:FindFirstChild("Map"):FindFirstChild("BuffGivers")["Basic Blessing"].Position-Vector3.new(0,-3,0)
+		p = map:FindFirstChild("BuffGivers")["Basic Blessing"].Position-Vector3.new(0,-3,0)
 	elseif checkblessing() == false then
-		for _,v in pairs(map:FindFirstChild("DroppedItems"):GetDescendants()) do
-			if v:IsA("ProximityPrompt") then
-				p = v.Parent.Position
+		if #map:FindFirstChild("DroppedItems"):GetDescendants() ~= 0 then
+			for _,v in pairs(map:FindFirstChild("DroppedItems"):GetDescendants()) do
+				if v:IsA("ProximityPrompt") then
+					p = v.Parent.Position
+				end
 			end
 		end
 	end
@@ -96,9 +98,8 @@ local function walk()
 						humanoid.MoveToFinished:Wait()
 					end
 				end
+				wpfolder:ClearAllChildren()
 			end
-		else
-			repeat task.wait() des = path() print("no path") until des ~= nil 
 		end
 	end
 end
