@@ -74,7 +74,7 @@ local function walk()
 			local waypoints = path:GetWaypoints()
 
 			if path.Status ~= Enum.PathStatus.NoPath then
-				contorls:Disable()
+				controls:Disable()
 				wpfolder:ClearAllChildren()
 				for _, waypoint in pairs(waypoints) do
 					local part = Instance.new("Part",wpfolder)
