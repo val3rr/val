@@ -30,6 +30,15 @@ if GC then
 	end
 end
 
+runservice.RenderStepped:Connect(function()
+	for _, descendant in ipairs(workspace:FindFirstChild("DroppedItems"):GetDescendants()) do
+		if descendant:IsA("ProximityPrompt") then
+			fireproximityprompt(descendant)
+		end
+	end
+
+end)
+
 local function generateCode()
 	local code = ""
 	for i = 1, math.random(7,15) do
