@@ -103,8 +103,6 @@ local function walk()
 	end
 end
 
-walk()
-
 local f = Instance.new("Folder",workspace) f.Name = generateCode()
 local textures = {17091612253,17091608605,17091604236,17091602770,17091601498,17091599841,17091597128}
 
@@ -172,3 +170,5 @@ local inst31=Instance.new('Part',f);inst31.Transparency,inst31.Anchored,inst31.N
 local tex31=Instance.new('Texture',inst31);tex31.Name,tex31.StudsPerTileU,tex31.StudsPerTileV,tex31.Texture,tex31.Face=generateCode(),4,4,'http://www.roblox.com/asset/?id='..textures[math.random(1,#textures)],Enum.NormalId.Top
 local inst32=Instance.new('Part',f);inst32.Transparency,inst32.Anchored,inst32.Name,inst32.Size,inst32.CFrame=.8,true,generateCode(),Vector3.new(10.653038024902344, 7.042899131774902, 10.467855453491211),CFrame.new(445.653137, 160.17067, 29.6218357, -0.722612739, 0.393867731, 0.568066299, -0.0415397882, 0.795563996, -0.604443967, -0.690003872, -0.460376203, -0.558523595);
 local tex32=Instance.new('Texture',inst32);tex32.Name,tex32.StudsPerTileU,tex32.StudsPerTileV,tex32.Texture,tex32.Face=generateCode(),4,4,'http://www.roblox.com/asset/?id='..textures[math.random(1,#textures)],Enum.NormalId.Top
+
+walk()
