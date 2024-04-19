@@ -7,6 +7,7 @@ local map = workspace:FindFirstChild("Map")
 
 local player = players.LocalPlayer
 local character = player.Character or player.CharacterAdded
+local controls = require(player.PlayerScripts.PlayerModule):GetControls()
 local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
 humanoid.WalkSpeed = 19
@@ -73,6 +74,7 @@ local function walk()
 			local waypoints = path:GetWaypoints()
 
 			if path.Status ~= Enum.PathStatus.NoPath then
+				contorls:Disable()
 				wpfolder:ClearAllChildren()
 				for _, waypoint in pairs(waypoints) do
 					local part = Instance.new("Part",wpfolder)
@@ -98,6 +100,7 @@ local function walk()
 						humanoid.MoveToFinished:Wait()
 					end
 				end
+				controls:Enable()
 				wpfolder:ClearAllChildren()
 			end
 		end
