@@ -96,7 +96,7 @@ local function walk()
 				end
 
 				for _, waypoint in pairs(waypoints) do
-					if humanoidrootpart.Anchored == true then
+					if humanoidrootpart.Anchored == true or (waypoint.Position - humanoidrootpart) > 25 then
 						walk()
 						break
 					else
