@@ -54,11 +54,10 @@ local function path()
 	if checkblessing() == true then
 		p = map:FindFirstChild("BuffGivers")["Basic Blessing"].Position-Vector3.new(0,-3,0)
 	elseif checkblessing() == false then
-		if #map:FindFirstChild("DroppedItems"):GetDescendants() ~= 0 then
-			for _,v in pairs(map:FindFirstChild("DroppedItems"):GetDescendants()) do
-				if v:IsA("ProximityPrompt") then
-					p = v.Parent.Position
-				end
+		repeat task.wait() until #workspace:FindFirstChild("DroppedItems"):GetDescendants() ~= 0
+		for _,v in pairs(map:FindFirstChild("DroppedItems"):GetDescendants()) do
+			if v:IsA("ProximityPrompt") then
+				p = v.Parent.Position
 			end
 		end
 	end
