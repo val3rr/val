@@ -76,8 +76,8 @@ end
 local function walk()
 	while true do task.wait()
 		local des = path()
-		if des then print("yay path")
-			local path = pathfindingservice:CreatePath({ WaypointSpacing = 4, AgentRadius = 0.6, AgentCanJump = true })
+		if des then --print("yay path")
+			local path = pathfindingservice:CreatePath({ WaypointSpacing = 8, AgentRadius = 0.6, AgentCanJump = true })
 			path:ComputeAsync(humanoidrootpart.Position - Vector3.new(0,2.5,0), des)
 			local waypoints = path:GetWaypoints()
 
@@ -100,7 +100,7 @@ local function walk()
 						walk()
 						break
 					else
-						print("going")
+						--print("going")
 						if waypoint.Action == Enum.PathWaypointAction.Jump then
 							humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 						end
