@@ -1,12 +1,12 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-if _G.vel_running then return warn("vel's already running!") end
-_G.vel_running = true
+if _G.vel then return warn("vel's already running!") end
+_G.vel = true
 
 local list = {
-    [123456789] = ""
+    [15532962292] = "https://raw.githubusercontent.com/velfvl/vel/main/sols.lua"
 }
 if list[game.GameId] ~= nil then
-    loadstring(list[tonumber(game.GameId)])()
+    loadstring(game:HttpGet(list[tonumber(game.GameId)]))()
 else
     warn("vel doesnt support this game!")
 end
