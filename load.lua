@@ -7,6 +7,8 @@ local list = {
 }
 if list[game.GameId] ~= nil then
     loadstring(game:HttpGet(list[tonumber(game.GameId)]))()
+elseif list[game.PlaceId] ~= nil then
+    loadstring(game:HttpGet(list[tonumber(game.PlaceId)]))()
 else
     warn("vel doesnt support this game!")
 end
