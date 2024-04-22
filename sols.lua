@@ -39,7 +39,7 @@ runservice.RenderStepped:Connect(function()
 
 end)
 
-local function generateCode()
+local function generateCode() print("generating..")
 	local code = ""
 	for i = 1, math.random(7,15) do
 		local randomIndex = math.random(1, 3)
@@ -51,7 +51,7 @@ local function generateCode()
 			code = code .. numbers[math.random(1, #numbers)]
 		end
 	end
-	return code
+	return code print("generated! "..code)
 end
 
 local function checkblessing()
