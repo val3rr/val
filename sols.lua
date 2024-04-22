@@ -10,7 +10,7 @@ local character = player.Character or player.CharacterAdded
 local controls = require(player.PlayerScripts.PlayerModule):GetControls()
 local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
-humanoid.WalkSpeed = 19
+humanoid.WalkSpeed = 17.5
 
 local wpfolder = workspace:FindFirstChild("waypoints")
 if not wpfolder then wpfolder = Instance.new("Folder",workspace) wpfolder.Name = "waypoints" end
@@ -96,7 +96,7 @@ local function walk()
 				end
 
 				for _, waypoint in pairs(waypoints) do
-					if humanoidrootpart.Anchored == true or (waypoint.Position - humanoidrootpart.Position).magnitude > 25 then
+					if humanoidrootpart.Anchored == true or (waypoint.Position - (humanoidrootpart.Position - Vector.new(0,3,0)).magnitude > 35 then
 						walk()
 						break
 					else
@@ -105,7 +105,7 @@ local function walk()
 							humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 						end
 						humanoid:MoveTo(waypoint.Position)
-						humanoid.MoveToFinished:Wait()
+						humanoid.MoveToFinished:Wait(.1)
 					end
 				end
 				controls:Enable()
