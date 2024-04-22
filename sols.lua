@@ -51,7 +51,8 @@ local function generateCode() print("generating..")
 			code = code .. numbers[math.random(1, #numbers)]
 		end
 	end
-	return code print("generated! "..code)
+print("generated!: "..code)
+	return code
 end
 
 local function checkblessing()
