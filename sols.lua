@@ -21,99 +21,99 @@ local numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
 
 local GC = getconnections or get_signal_cons
 if GC then
-	for i,v in pairs(GC(player.Idled)) do
-		if v["Disable"] then
-			v["Disable"](v)
-		elseif v["Disconnect"] then
-			v["Disconnect"](v)
-		end
-	end
+        for i,v in pairs(GC(player.Idled)) do
+                if v["Disable"] then
+                        v["Disable"](v)
+                elseif v["Disconnect"] then
+                        v["Disconnect"](v)
+                end
+        end
 end
 
 runservice.RenderStepped:Connect(function()
-	for _, descendant in ipairs(workspace:FindFirstChild("DroppedItems"):GetDescendants()) do
-		if descendant:IsA("ProximityPrompt") then
-			fireproximityprompt(descendant)
-		end
-	end
+        for _, descendant in ipairs(workspace:FindFirstChild("DroppedItems"):GetDescendants()) do
+                if descendant:IsA("ProximityPrompt") then
+                        fireproximityprompt(descendant)
+                end
+        end
 
 end)
 
 local function generateCode() print("generating..")
-	local code = ""
-	for i = 1, math.random(7,15) do
-		local randomIndex = math.random(1, 3)
-		if randomIndex == 1 then
-			code = code .. symbols[math.random(1, #symbols)]
-		elseif randomIndex == 2 then
-			code = code .. letters[math.random(1, #letters)]
-		else
-			code = code .. numbers[math.random(1, #numbers)]
-		end
-	end
+        local code = ""
+        for i = 1, math.random(7,15) do
+                local randomIndex = math.random(1, 3)
+                if randomIndex == 1 then
+                        code = code .. symbols[math.random(1, #symbols)]
+                elseif randomIndex == 2 then
+                        code = code .. letters[math.random(1, #letters)]
+                else
+                        code = code .. numbers[math.random(1, #numbers)]
+                end
+        end
 print("generated!: "..code)
-	return code
+        return code
 end
 
 local function checkblessing()
-	return map:FindFirstChild("BuffGivers")["Basic Blessing"].Attachment.Star.Enabled
+        return map:FindFirstChild("BuffGivers")["Basic Blessing"].Attachment.Star.Enabled
 end
 
 local function path()
-	local p
-	if checkblessing() == true then
-		p = map:FindFirstChild("BuffGivers")["Basic Blessing"].Position-Vector3.new(0,-3,0)
-	elseif checkblessing() == false then
-		repeat task.wait() until #workspace:FindFirstChild("DroppedItems"):GetDescendants() ~= 0
-		for _,v in pairs(workspace:FindFirstChild("DroppedItems"):GetDescendants()) do
-			if v:IsA("ProximityPrompt") then
-				p = v.Parent.Position
-			end
-		end
-	end
-	return p
+        local p
+        if checkblessing() == true then
+                p = map:FindFirstChild("BuffGivers")["Basic Blessing"].Position-Vector3.new(0,-3,0)
+        elseif checkblessing() == false then
+                repeat task.wait() until #workspace:FindFirstChild("DroppedItems"):GetDescendants() ~= 0
+                for _,v in pairs(workspace:FindFirstChild("DroppedItems"):GetDescendants()) do
+                        if v:IsA("ProximityPrompt") then
+                                p = v.Parent.Position
+                        end
+                end
+        end
+        return p
 end
 
 local function walk()
-	while true do task.wait()
-		local des = path()
-		if des then --print("yay path")
-			local path = pathfindingservice:CreatePath({ WaypointSpacing = 8, AgentRadius = 0.6, AgentCanJump = true })
-			path:ComputeAsync(humanoidrootpart.Position - Vector3.new(0,2.5,0), des)
-			local waypoints = path:GetWaypoints()
+        while true do task.wait()
+                local des = path()
+                if des then --print("yay path")
+                        local path = pathfindingservice:CreatePath({ WaypointSpacing = 8, AgentRadius = 0.6, AgentCanJump = true })
+                        path:ComputeAsync(humanoidrootpart.Position - Vector3.new(0,2.5,0), des)
+                        local waypoints = path:GetWaypoints()
 
-			if path.Status ~= Enum.PathStatus.NoPath then
-				controls:Disable()
-				wpfolder:ClearAllChildren()
-				for _, waypoint in pairs(waypoints) do
-					local part = Instance.new("Part",wpfolder)
-					part.Color = Color3.fromRGB(255,255,255)
-					part.Size = Vector3.new(.5,.5,.5)
-					part.Position = waypoint.Position
-					part.Shape = "Ball"
-					part.Material = "Neon"
-					part.Anchored = true
-					part.CanCollide = false
-				end
+                        if path.Status ~= Enum.PathStatus.NoPath then
+                                controls:Disable()
+                                wpfolder:ClearAllChildren()
+                                for _, waypoint in pairs(waypoints) do
+                                        local part = Instance.new("Part",wpfolder)
+                                        part.Color = Color3.fromRGB(255,255,255)
+                                        part.Size = Vector3.new(.5,.5,.5)
+                                        part.Position = waypoint.Position
+                                        part.Shape = "Ball"
+                                        part.Material = "Neon"
+                                        part.Anchored = true
+                                        part.CanCollide = false
+                                end
 
-				for _, waypoint in pairs(waypoints) do
-					if humanoidrootpart.Anchored == true or (waypoint.Position - (humanoidrootpart.Position - Vector3.new(0,3,0))).magnitude > 35 then
-						walk()
-						break
-					else
-						--print("going")
-						if waypoint.Action == Enum.PathWaypointAction.Jump then
-							humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-						end
-						humanoid:MoveTo(waypoint.Position)
-						humanoid.MoveToFinished:Wait(.1)
-					end
-				end
-				controls:Enable()
-				wpfolder:ClearAllChildren()
-			end
-		end
-	end
+                                for _, waypoint in pairs(waypoints) do
+                                        if humanoidrootpart.Anchored == true or (waypoint.Position - (humanoidrootpart.Position - Vector3.new(0,3,0))).magnitude > 35 then
+                                                walk()
+                                                break
+                                        else
+                                                --print("going")
+                                                if waypoint.Action == Enum.PathWaypointAction.Jump then
+                                                        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                                                end
+                                                humanoid:MoveTo(waypoint.Position)
+                                                humanoid.MoveToFinished:Wait(.1)
+                                        end
+                                end
+                                controls:Enable()
+                                wpfolder:ClearAllChildren()
+                        end
+                end
+        end
 end
 
 local f = Instance.new("Folder",workspace) f.Name = generateCode()
