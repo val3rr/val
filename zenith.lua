@@ -12,7 +12,7 @@ if GC then
         end
 end
 
-local _use() game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("LuckPotion")
+local function _use() game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("LuckPotion")
 game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("CooldownPotion")
 end
 
