@@ -12,20 +12,13 @@ if GC then
         end
 end
 
-game:GetService("RunService").RenderStepped:Connect(function()
-  for _,v in pairs(workspace.Collectibles:GetDescendants()) do
-    if v:IsA("ClickDetector") then
-      fireclickdetector(v)
-    end
-  end
-end)
-
 local function collect()
   while true do task.wait()
     for _,v in pairs(workspace.Collectibles:GetDescendants()) do
-      if v and v:IsA("ClickDetector") then print("collected")
+      if v and v:IsA("ClickDetector") then 
         character:MoveTo(v.Parent.Position)
-        task.wait(.5)
+        fireclickdetector(v) print("collected")
+        task.wait(.1)
       end
     end
   end
