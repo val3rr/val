@@ -1,4 +1,4 @@
-local virtualinputmanager = game:GetService('VirtualInputManager')
+olocal virtualinputmanager = game:GetService('VirtualInputManager')
 local pathfindingservice = game:GetService("PathfindingService")
 local runservice = game:GetService("RunService")
 local players = game:GetService("Players")
@@ -78,8 +78,10 @@ local function walk()
         while true do task.wait()
                 local des = path()
                 if des then --print("yay path")
+local success,error pcall(function()
                         local path = pathfindingservice:CreatePath({ WaypointSpacing = 8, AgentRadius = 0.6, AgentCanJump = true })
-                        path:ComputeAsync(humanoidrootpart.Position - Vector3.new(0,2.5,0), des)
+                        path:ComputeAsync(humanoidrootpart.Position - Vector3.new(0,2.5,0), des) end)
+if success and path.Status == Enum.PathStatus.Success then
                         local waypoints = path:GetWaypoints()
 
                         if path.Status ~= Enum.PathStatus.NoPath then
@@ -110,8 +112,9 @@ local function walk()
                                         end
                                 end
                                 controls:Enable()
-                                wpfolder:ClearAllChildren()
+                             wpfolder:ClearAllChildren()
                         end
+end
                 end
         end
 end
