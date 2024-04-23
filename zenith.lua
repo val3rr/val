@@ -12,7 +12,7 @@ if GC then
         end
 end
 
-game:GetService("Run Service").RenderStepped:Connect(function()
+game:GetService("RunService").RenderStepped:Connect(function()
   for _,v in pairs(workspace.Collectibles:GetDescendants()) do
     if v:IsA("ClickDetector") then
       fireclickdetector(v)
