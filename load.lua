@@ -1,9 +1,10 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-if _G.vel then return warn("vel's already running!") end
+if _G.vel and not _G.testing then return warn("vel's already running!") end
 _G.vel = true
 
 local list = {
-    [15532962292] = "https://raw.githubusercontent.com/velfvl/vel/main/sols.lua"
+    [15532962292] = "https://raw.githubusercontent.com/velfvl/vel/main/sols.lua";
+    [16481032741] = "https://raw.githubusercontent.com/velfvl/vel/main/zenith.lua"
 }
 if list[game.GameId] ~= nil then
     loadstring(game:HttpGet(list[tonumber(game.GameId)]))()
