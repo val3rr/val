@@ -1,4 +1,3 @@
-olocal virtualinputmanager = game:GetService('VirtualInputManager')
 local pathfindingservice = game:GetService("PathfindingService")
 local runservice = game:GetService("RunService")
 local players = game:GetService("Players")
