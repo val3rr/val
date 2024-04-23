@@ -13,7 +13,9 @@ if GC then
 end
 
 local function _use() game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("LuckPotion")
+
 game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("CooldownPotion")
+
 end
 
 game:GetService("RunService").RenderStepped:Connect(function() _use() end)
