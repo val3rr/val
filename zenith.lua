@@ -23,7 +23,7 @@ end)
 local function collect()
   while true do task.wait()
     for _,v in pairs(workspace.Collectibles:GetDescendants()) do
-      if v:IsA("ClickDetector") then print("collected")
+      if v and v:IsA("ClickDetector") then print("collected")
         character:MoveTo(v.Parent.Position)
         task.wait(.5)
       end
