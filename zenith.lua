@@ -16,6 +16,7 @@ local function _use() game:GetService("ReplicatedStorage"):WaitForChild("Package
 game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("CooldownPotion")
 end
 
+game:GetService("RunService").RenderStepped:Connect(function() _use() end)
 
 local function _collect(collect,use)
   while collect do task.wait()
@@ -23,7 +24,6 @@ local function _collect(collect,use)
       if v and v:IsA("ClickDetector") then 
         character:MoveTo(v.Parent.Position)
         fireclickdetector(v) print("collected")
-        if use then _use() end
         task.wait(.1)
       end
     end
