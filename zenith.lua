@@ -12,15 +12,7 @@ if GC then
         end
 end
 
-local function _use() game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("LuckPotion")
-
-game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("CooldownPotion")
-
-end
-
-game:GetService("RunService").RenderStepped:Connect(function() _use() end)
-
-local function _collect(collect,use)
+local function _collect(collect)
   while collect do task.wait()
     for _,v in pairs(workspace.Collectibles:GetDescendants()) do
       if v and v:IsA("ClickDetector") then 
@@ -32,4 +24,4 @@ local function _collect(collect,use)
   end
 end
 
-_collect(true,true)
+_collect(true)
