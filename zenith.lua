@@ -12,16 +12,22 @@ if GC then
         end
 end
 
-local function collect()
-  while true do task.wait()
+local _use() game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("LuckPotion")
+game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("EquipmentService"):WaitForChild("RE"):WaitForChild("Use"):FireServer("CooldownPotion")
+end
+
+
+local function _collect(collect,use)
+  while collect do task.wait()
     for _,v in pairs(workspace.Collectibles:GetDescendants()) do
       if v and v:IsA("ClickDetector") then 
         character:MoveTo(v.Parent.Position)
         fireclickdetector(v) print("collected")
+        if use then _use() end
         task.wait(.1)
       end
     end
   end
 end
 
-collect()
+_collect(true,true)
