@@ -4,7 +4,8 @@ _G.vel = true
 
 local list = {
     [15532962292] = "https://raw.githubusercontent.com/velfvl/vel/main/sols.lua";
-    [16481032741] = "https://raw.githubusercontent.com/velfvl/vel/main/zenith.lua"
+    [16481032741] = "https://raw.githubusercontent.com/velfvl/vel/main/zenith.lua";
+    [9032150459] = "https://raw.githubusercontent.com/velfvl/vel/main/bcwo%20mine.lua"
 }
 if list[game.GameId] ~= nil then
     loadstring(game:HttpGet(list[tonumber(game.GameId)]))()
