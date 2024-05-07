@@ -34,8 +34,23 @@ local function checkpickaxe(a)
 end
 
 local function filter(a)
-  if #filter.blacklist ~= 0 then
-    
+	local b = nil
+	for _,v in pairs(workspace.Map.Ores:GetChildren()) do
+		local n = v.Name:lower()
+		if n == a.Name:lower() then
+			if table.find(filters.whitelist,n) then
+				b=n
+				--print(n.."a",filters.whitelist,#filters.whitelist)
+			elseif #filters.blacklist ~= 0 and not table.find(filters.blacklist,n) then
+				b=n
+				--print(n.."b",filters.blacklist,#filters.blacklist)
+			else
+				b=n
+				--print(n.."c")
+			end
+		end
+	end
+	return b
 end
   
 local function getpickaxe()
@@ -62,5 +77,8 @@ end
 
 while true do task.wait()
   for _,v in pairs(workspace.Map.Ores:GetChildren()) do
-    
+    if filter(v) and getpickaxe() then
+      mine(v,getpickaxe())
+    end
+  end
 end
