@@ -1,4 +1,4 @@
-local players = game:GetService("Players")
+--[[local players = game:GetService("Players")
 
 local player = players.LocalPlayer
 local character = player.Character or player.CharacterAdded
@@ -81,4 +81,4 @@ while true do task.wait()
 			mine(v,getpickaxe())
 		end
 	end
-end
+end]]
