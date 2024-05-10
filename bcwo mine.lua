@@ -1,4 +1,4 @@
---[[local players = game:GetService("Players")
+local players = game:GetService("Players")
 
 local player = players.LocalPlayer
 local character = player.Character or player.CharacterAdded
@@ -7,12 +7,14 @@ local humanoid = character:WaitForChild("Humanoid")
 
 local controls = require(player.PlayerScripts.PlayerModule):GetControls()
 
-local filters = {
-	blacklist = getgenv.blacklist;
-	whitelist = getgenv.whitelist
+local whitelist = {
+	enabled = true;
+	ores = {-- to whitelist do something like "moonstone", "forbidden crystal" dont forget the comma, its also names sensitive so be careful. you can leave it off if you want to generally mine everything.
+		"forbidden crystal",
+		"moonstone"
+	}
 }
 
-if #filters.blacklist ~= 0 and #filters.whitelist ~= 0 then return error("you cant blacklist & whtielist at the same time!") end
 
 local GC = getconnections or get_signal_cons
 if GC then
@@ -34,23 +36,15 @@ local function checkpickaxe(a)
 end
 
 local function filter(a)
-	local b = nil
 	for _,v in pairs(workspace.Map.Ores:GetChildren()) do
+		if whitelist.enabled == false then return v end
 		local n = v.Name:lower()
 		if n == a.Name:lower() then
-			if table.find(filters.whitelist,n) then
-				b=n
-				--print(n.."a",filters.whitelist,#filters.whitelist)
-			elseif #filters.blacklist ~= 0 and not table.find(filters.blacklist,n) then
-				b=n
-				--print(n.."b",filters.blacklist,#filters.blacklist)
-			else
-				b=n
-				--print(n.."c")
+			if table.find(whitelist.ores,n) then
+				return v
 			end
 		end
 	end
-	return b
 end
 
 local function getpickaxe()
@@ -64,21 +58,15 @@ local function getpickaxe()
 	end
 end
 
-local function mine(a,b)
-	local cf = humanoidrootpart.CFrame
-	humanoidrootpart.Anchored = true
-	humanoidrootpart.CFrame = a.CFrame*CFrame.new(-2,0,0)
-	repeat task.wait()
-		b:FindFirstChild("RemoteFunction"):InvokeServer("mine")
-	until a.Mineral.Broken.Played
-	humanoidrootpart.Anchored = false
-	humanoidrootpart.CFrame = cf
-end
-
 while true do task.wait()
 	for _,v in pairs(workspace.Map.Ores:GetChildren()) do
 		if filter(v) and getpickaxe() then
-			mine(v,getpickaxe())
+			local cf = humanoidrootpart.CFrame
+			humanoidrootpart.CFrame = v.CFrame*CFrame.new(-2,0,-1)
+			repeat task.wait()
+				getpickaxe():FindFirstChild("RemoteFunction"):InvokeServer("mine")
+			until not v.Mineral or v
+			humanoidrootpart.CFrame = cf
 		end
 	end
-end]]
+end
