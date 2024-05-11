@@ -126,6 +126,17 @@ local function findnextore()
 	end
 end
 
+local function findcreepy()
+	local creepy = workspace:FindFirstChild("Creepy")
+	if creepy then
+		return creepy
+	end
+end
+
+local function clearcreepy(target)
+
+end
+
 local function mining()
 	local pickaxe = findpickaxe()
 	if pickaxe then
