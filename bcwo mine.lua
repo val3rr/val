@@ -6,6 +6,8 @@ local lighting = game:GetService("Lighting")
 local players = game:GetService("Players")
 
 local player = players.LocalPlayer
+local character = player.Character
+local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 
 local selectedOre = ""
 
