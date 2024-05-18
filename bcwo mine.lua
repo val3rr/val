@@ -154,7 +154,7 @@ local function mining()
 
 	local success, response
 	while true do
-		if not success then warn("error found! |: "..response) end
+		if not success and response then warn("error found! |: "..response) end
 		success, response = pcall(function()
 			local ore = findnextore()
 			if findcreepy then print("ja creepy has been found!!!!!!!") clearcreepies() end
