@@ -152,12 +152,18 @@ local function mining()
 		usepickaxe(pickaxe)
 	end
 
-	local success, response
-	while true do
-		if not success and response then warn("error found! |: "..response) end
-		success, response = pcall(function()
+	local success, response = pcall(function()
+		while true do
+			if not success and response then warn("error found! |: "..response) end
 			local ore = findnextore()
-			if findcreepy then print("ja creepy has been found!!!!!!!") clearcreepies() end
+			if findcreepy() then print("ja creepy has been found!!!!!!!")
+				local creepy = findcreepy()
+				local nowcfh = humanoidrootpart.CFrame
+				humanoidrootpart.CFrame = (creepy.HumanoidRootPart.CFrame*CFrame.new(0,75,0))
+				task.wait(.25)
+				repeat task.wait() humanoidrootpart.CFrame = CFrame.new(0,50000,0) until not workspace:FindFirstChild(creepy)
+				humanoidrootpart.CFrame = nowcfh
+			end
 			if ore then
 				local connection
 				connection = runservice.Heartbeat:Connect(function()
@@ -167,12 +173,10 @@ local function mining()
 						connection:Disconnect()
 					end
 				end)
-	
-				local pickaxeTool = findpickaxe()
+						local pickaxeTool = findpickaxe()
 				local power = pickaxeTool and pickaxeTool:FindFirstChild("Power") and pickaxeTool:FindFirstChild("Power").Value or 0
 				local oreToughness = ore.Properties:FindFirstChild("Toughness") and ore.Properties:FindFirstChild("Toughness").Value or 0
-	
-				if power >= oreToughness then
+						if power >= oreToughness then
 					if pickaxeTool:FindFirstChild("RemoteFunction") then
 						print("mining "..ore.Name.." with "..pickaxeTool.Name..", pickaxe power is "..power)
 						while true and ore.Properties.Hitpoint.Value > 0 do
@@ -190,16 +194,14 @@ local function mining()
 				else
 					warn("your pickaxe needs an upgrade (power is too low, craft a better one)")
 				end
-	
-				if connection then
+						if connection then
 					connection:Disconnect()
 				end
-	
-				task.wait()
+						task.wait()
 			end
 			task.wait()
-		end)
-	end
+		end
+	end)
 end
 
 mining()
