@@ -161,7 +161,7 @@ local function mining()
 				local nowcfh = humanoidrootpart.CFrame
 				humanoidrootpart.CFrame = (creepy.HumanoidRootPart.CFrame*CFrame.new(0,75,0))
 				task.wait(.25)
-				repeat task.wait() humanoidrootpart.CFrame = CFrame.new(0,50000,0) until not workspace:FindFirstChild(creepy)
+				repeat task.wait() humanoidrootpart.CFrame = CFrame.new(0,50000,0) until not findcreepy()
 				humanoidrootpart.CFrame = nowcfh
 			end
 			if ore then
