@@ -198,8 +198,8 @@ local function mining()
 				task.wait()
 			end
 			task.wait()
-		end
-	end)
+		end)
+	end
 end
 
 mining()
