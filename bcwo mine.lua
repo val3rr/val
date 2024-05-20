@@ -9,6 +9,9 @@ local player = players.LocalPlayer
 local character = player.Character
 local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 
+--local priority
+--if getgenv().set["priority"] then priority = getgenv().set["priority"] end
+
 local selectedOre = ""
 
 local GC = getconnections or get_signal_cons
