@@ -167,7 +167,7 @@ local function mining()
 				repeat task.wait() humanoidrootpart.CFrame = CFrame.new(0,50000,0) until not findcreepy()
 				humanoidrootpart.CFrame = nowcfh
 			end
-			if ore and ore:GetChildren() ~= 0 then
+			if ore and #ore:GetChildren() ~= 0 then
 				local connection
 				connection = runservice.Heartbeat:Connect(function()
 					if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
