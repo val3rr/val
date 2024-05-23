@@ -94,7 +94,7 @@ end
 
 local function findnextore()
 	local pickaxeTool = findpickaxe()
-	if not pickaxeTool then return nil end
+	if not pickaxeTool then return end
 
 	local pickaxePower = pickaxeTool.Power.Value
 	local ores = workspace.Map.Ores:GetChildren()
@@ -159,7 +159,7 @@ local function mining()
 		while true do
 			if not success and response then warn("error found! |: "..response) end
 			local ore = findnextore()
-			if findcreepy() then print("ja creepy has been found!!!!!!!")
+			if findcreepy() then --print("ja creepy has been found!!!!!!!")
 				local creepy = findcreepy()
 				local nowcfh = humanoidrootpart.CFrame
 				humanoidrootpart.CFrame = (creepy.HumanoidRootPart.CFrame*CFrame.new(0,75,0))
@@ -167,7 +167,7 @@ local function mining()
 				repeat task.wait() humanoidrootpart.CFrame = CFrame.new(0,50000,0) until not findcreepy()
 				humanoidrootpart.CFrame = nowcfh
 			end
-			if ore then
+			if ore and ore:GetChildren() ~= 0 then
 				local connection
 				connection = runservice.Heartbeat:Connect(function()
 					if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -181,7 +181,7 @@ local function mining()
 				local oreToughness = ore.Properties:FindFirstChild("Toughness") and ore.Properties:FindFirstChild("Toughness").Value or 0
 						if power >= oreToughness then
 					if pickaxeTool:FindFirstChild("RemoteFunction") then
-						print("mining "..ore.Name.." with "..pickaxeTool.Name..", pickaxe power is "..power)
+						--print("mining "..ore.Name.." with "..pickaxeTool.Name..", pickaxe power is "..power)
 						while true and ore.Properties.Hitpoint.Value > 0 do
 							if player.Character and player.Character:FindFirstChild("Torso") then
 								pickaxeTool.RemoteFunction:InvokeServer("mine")
