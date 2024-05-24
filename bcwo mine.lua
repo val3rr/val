@@ -83,7 +83,7 @@ local function teleporttoore(target, distance, rotation, lookAt)
 		local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
 		if humanoidRootPart then
 			local targetPart = target:IsA("Model") and target:FindFirstChildWhichIsA("BasePart") or target:FindFirstChildWhichIsA("BasePart") or target
-			if targetpart:IsA("Model") and #targetpart:GetChildren() == 0 then targetpart:Remove() selectedOre = "" return end
+			--if targetpart:IsA("Model") and #targetpart:GetChildren() == 0 then targetpart:Remove() selectedOre = "" return end
 			if targetPart then
 				local targetPosition = targetPart.Position + distance
 				local lookAtPosition = lookAt or targetPart.Position
