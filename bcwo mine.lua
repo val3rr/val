@@ -9,10 +9,8 @@ local player = players.LocalPlayer
 local character = player.Character
 local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 
---local priority
---if getgenv().set["priority"] then priority = getgenv().set["priority"] end
-
-local selectedOre = ""
+local priority = {}
+if getgenv().set["priority"] then priority = getgenv().set["priority"] end
 
 local GC = getconnections or get_signal_cons
 if GC then
@@ -83,7 +81,7 @@ local function teleporttoore(target, distance, rotation, lookAt)
 		local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
 		if humanoidRootPart then
 			local targetPart = target:IsA("Model") and target:FindFirstChildWhichIsA("BasePart") or target:FindFirstChildWhichIsA("BasePart") or target
-			--if targetpart:IsA("Model") and #targetpart:GetChildren() == 0 then targetpart:Remove() selectedOre = "" return end
+			if targetPart:IsA("Model") and #targetpart:GetChildren() == 0 then targetpart:Remove() selectedOre = "" return end
 			if targetPart then
 				local targetPosition = targetPart.Position + distance
 				local lookAtPosition = lookAt or targetPart.Position
@@ -114,7 +112,7 @@ local function findnextore()
 				if hitpoint > 0 and pickaxePower >= oreToughness and meshPart then
 					local base = ore:FindFirstChild("Base")
 					if not base or (base and not (base.Rotation.X == 0 and base.Rotation.Y == 90 and base.Rotation.Z == 0)) then
-						if selectedOre == "" or ore.Name:find(selectedOre) then
+						if #priority == 0 or table.find(priority,ore.Name:lowered()) then
 							local distance = (humanoidRootPart.Position - meshPart.Position).Magnitude
 							if distance < minDistance then
 								minDistance = distance
