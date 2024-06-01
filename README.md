@@ -5,7 +5,7 @@ getgenv.set = {
 }
 loadstring(game:HttpGet('https://raw.githubusercontent.com/velfvl/vel/main/load.lua'))()
 ```
-supported games:
+## supported games:
 none to be known of yet
 
-more stuff soon!
+### more stuff soon!
