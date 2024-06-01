@@ -1,6 +1,6 @@
 ## script
 ```lua
-getgenv.set = {
+getgenv().set = {
   --["priority"] = {"forbidden crystal","moonstone","purite","hevenite","gemstone of purity"}
 }
 loadstring(game:HttpGet('https://raw.githubusercontent.com/val3rr/val4r/main/load.lua'))()
