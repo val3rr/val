@@ -137,17 +137,6 @@ local function findcreepy()
 	end
 end
 
-local function clearcreepies()
-	for _,v in pairs(workspace:GetChildren()) do
-		if v:IsA("Model") and v.name == "Creepy" then
-			local nowcfh = humanoidrootpart.CFrame
-			humanoidrootpart.CFrame = (v.HumanoidRootPart.CFrame*CFrame.new(0,75,0))
-			task.wait(.25)
-		end
-	end
-	repeat task.wait() humanoidrootpart.CFrame = CFrame.new(0,50000,0) until not findcreepy()
-end
-
 local function mining()
 	local pickaxe = findpickaxe()
 	if pickaxe then
@@ -178,7 +167,7 @@ local function mining()
 						local pickaxeTool = findpickaxe()
 				local power = pickaxeTool and pickaxeTool:FindFirstChild("Power") and pickaxeTool:FindFirstChild("Power").Value or 0
 				local oreToughness = ore.Properties:FindFirstChild("Toughness") and ore.Properties:FindFirstChild("Toughness").Value or 0
-						if power >= oreToughness then
+				if power >= oreToughness then
 					if pickaxeTool:FindFirstChild("RemoteFunction") then
 						--print("mining "..ore.Name.." with "..pickaxeTool.Name..", pickaxe power is "..power)
 						while true and ore.Properties.Hitpoint.Value > 0 do
@@ -196,8 +185,9 @@ local function mining()
 				else
 					warn("your pickaxe needs an upgrade (power is too low, craft a better one)")
 				end
-						if connection then
+				if connection then
 					connection:Disconnect()
+					character:MoveTo(character.Torso.Position+Vector3.new(0,5,0))
 				end
 						task.wait()
 			end
