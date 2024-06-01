@@ -10,7 +10,7 @@ local character = player.Character
 local humanoidrootpart = character:WaitForChild("HumanoidRootPart")
 
 local priority = {}
-if getgenv().set["priority"] then priority = getgenv().set["priority"] end
+if getgenv().set["priority"] then priority = getgenv().set["priority"] warn("priority mine activated") end
 
 local GC = getconnections or get_signal_cons
 if GC then
@@ -81,7 +81,7 @@ local function teleporttoore(target, distance, rotation, lookAt)
 		local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
 		if humanoidRootPart then
 			local targetPart = target:IsA("Model") and target:FindFirstChildWhichIsA("BasePart") or target:FindFirstChildWhichIsA("BasePart") or target
-			if targetPart:IsA("Model") and #targetPart:GetChildren() == 0 then targetPart:Remove() selectedOre = "" return end
+			if targetPart:IsA("Model") and #targetPart:GetChildren() == 0 then targetPart:Remove() selectedOre = "" warn("removed ghost ore!") return end
 			if targetPart then
 				local targetPosition = targetPart.Position + distance
 				local lookAtPosition = lookAt or targetPart.Position
