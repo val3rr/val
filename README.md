@@ -10,6 +10,6 @@ none to be known of yet
 
 more stuff soon!
 <p align="center">
-    <img src="https://tenor.com/view/hello-chat-gif-23857673" />
+  <img src="https://media1.tenor.com/m/BiEgqfHRZOMAAAAd/hello-chat.gif" width="677px"/>
 </p>
 
