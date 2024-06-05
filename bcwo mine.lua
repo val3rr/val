@@ -81,7 +81,6 @@ local function teleporttoore(target, distance, rotation, lookAt)
 		local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
 		if humanoidRootPart then
 			local targetPart = target:IsA("Model") and target:FindFirstChildWhichIsA("BasePart") or target:FindFirstChildWhichIsA("BasePart") or target
-			if targetPart:IsA("Model") and #targetPart:GetChildren() == 0 then targetPart:Remove() selectedOre = "" warn("removed ghost ore!") return end
 			if targetPart then
 				local targetPosition = targetPart.Position + distance
 				local lookAtPosition = lookAt or targetPart.Position
@@ -105,7 +104,7 @@ local function findnextore()
 
 		for _, ore in pairs(ores) do
 			local properties = ore:FindFirstChild("Properties")
-			if properties then
+			if properties and #ore:GetChildren() >= 1 then
 				local oreToughness = properties:FindFirstChild("Toughness") and properties.Toughness.Value or 0
 				local hitpoint = properties:FindFirstChild("Hitpoint") and properties.Hitpoint.Value or 0
 				local meshPart = ore:FindFirstChildOfClass("MeshPart")
